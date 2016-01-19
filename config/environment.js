@@ -29,6 +29,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.apiEndpoint = 'http://localhost:5000';
     ENV.websockets.host = 'ws://localhost:5000/';
   }
 
@@ -45,7 +46,10 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    const heroku = 'shared-image.herokuapp.com';
 
+    ENV.websockets.host = 'ws://' + heroku;
+    ENV.apiEndpoint = 'http://' + heroku;
   }
 
   return ENV;

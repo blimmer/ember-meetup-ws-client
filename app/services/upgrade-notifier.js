@@ -1,20 +1,21 @@
 import Ember from 'ember';
-import ENV from 'notified/config/environment';
+
+const { on, inject } = Ember;
 
 export default Ember.Service.extend({
-  socketIo: Ember.inject.service('socket-io'),
+  socketService: inject.service('socket'),
+  flashMessages: inject.service(),
 
-  _startListening: Ember.on('init', function() {
-    const socket = this.get('socketIo').socketFor(ENV.websockets.host);
-
-    socket.on('connect', function() {
-      console.log('connected');
-    });
+  _startListening: on('init', function() {
+    const socket = this.get('socketService.socket');
 
     socket.on('upgrade', this.showUpgradeNotification, this);
   }),
 
   showUpgradeNotification() {
-    alert('lemme upgrade ya');
+    this.get('flashMessages').alert(
+      'A new version is available. Refresh.',
+      { sticky: true }
+    );
   }
 });
