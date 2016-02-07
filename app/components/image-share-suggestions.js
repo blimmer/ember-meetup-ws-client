@@ -8,12 +8,10 @@ export default Ember.Component.extend({
   socketService: inject.service('socket'),
   socket: computed.reads('socketService.socket'),
 
-  imageSuggestions: [
-    'https://media.giphy.com/media/YZaNlktdPMiTm/giphy.gif',  // bees
-    'https://media.giphy.com/media/4pMX5rJ4PYAEM/giphy.gif',  // disappear
-    'https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif',  // nyan
-    'https://media.giphy.com/media/10we3R8dLZQ7hS/giphy.gif', // doge
-  ],
+  store: inject.service('store'),
+  imageSuggestions: computed(function() {
+    return this.get('store').findAll('gif');
+  }),
 
   actions: {
     shareImg(url) {

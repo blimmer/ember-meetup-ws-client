@@ -1,5 +1,5 @@
 <h4>Tap Another Image to Share</h4>
-{{#each imageSuggestions as |img|}}
+{{#each imageSuggestions as |gif|}}
   <img class='image-suggestion thumbnail'
-       src={{img}} {{action 'shareImg' img}}  />
+       src={{gif.url}} {{action 'shareImg' gif.url}}  />
 {{/each}}
