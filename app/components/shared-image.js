@@ -1,11 +1,11 @@
 import Ember from 'ember';
 
-const { computed, inject } = Ember;
+const { computed, inject: { service } } = Ember;
 
 export default Ember.Component.extend({
   classNames: ['shared-image-container', 'small-10', 'columns', 'small-offset-1'],
 
-  socketService: inject.service('socket'),
+  socketService: service('socket'),
   socket: computed.reads('socketService.socket'),
 
   init() {

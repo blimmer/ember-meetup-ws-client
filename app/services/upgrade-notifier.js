@@ -1,10 +1,10 @@
 import Ember from 'ember';
 
-const { on, inject } = Ember;
+const { on, inject: { service } } = Ember;
 
 export default Ember.Service.extend({
-  socketService: inject.service('socket'),
-  flashMessages: inject.service(),
+  socketService: service('socket'),
+  flashMessages: service(),
 
   _startListening: on('init', function() {
     const socket = this.get('socketService.socket');
